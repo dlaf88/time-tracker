@@ -1,0 +1,29 @@
+[32m.[0m[32m.[0m[32m.[0m[31mF[0m[31mF[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m
+
+Failures:
+
+  1) navigate creation has a form that can be filled out
+     [31mFailure/Error: expect(page).to have_content("Some rationale.")[0m
+     [31m  expected to find text "Some rationale." in "Log in Email Password Remember me Sign up Forgot your password?"[0m
+     [36m# ./spec/features/post_spec.rb:32:in `block (3 levels) in <top (required)>'[0m
+     [36m# .bundle/binstubs/rspec:16:in `load'[0m
+     [36m# .bundle/binstubs/rspec:16:in `<main>'[0m
+
+  2) navigate creation has form that can be filled out with an associated user
+     [31mFailure/Error: expect(User.last.posts.last.rationale).to have_content("I created this post.")[0m
+     [31m[0m
+     [31mNoMethodError:[0m
+     [31m  undefined method `rationale' for nil:NilClass[0m
+     [31m  Did you mean?  rationalize[0m
+     [36m# ./spec/features/post_spec.rb:39:in `block (3 levels) in <top (required)>'[0m
+     [36m# .bundle/binstubs/rspec:16:in `load'[0m
+     [36m# .bundle/binstubs/rspec:16:in `<main>'[0m
+
+Finished in 0.39858 seconds (files took 3.09 seconds to load)
+[31m10 examples, 2 failures[0m
+
+Failed examples:
+
+[31mrspec ./spec/features/post_spec.rb:28[0m [36m# navigate creation has a form that can be filled out[0m
+[31mrspec ./spec/features/post_spec.rb:35[0m [36m# navigate creation has form that can be filled out with an associated user[0m
+
