@@ -7,8 +7,8 @@ require 'rspec/rails'
 require 'capybara/rails'
 
 include Warden::Test::Helpers
-Warden.test_mode!
-#Warden.test_reset!
+#Warden.test_mode!
+Warden.test_reset!
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
