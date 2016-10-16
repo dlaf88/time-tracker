@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show,:edit,:update]
+  before_action :set_post, only: [:show,:edit,:update,:destroy]
  
   def show    
   end
@@ -20,6 +20,11 @@ class PostsController < ApplicationController
   end
   def edit
     
+  end
+  
+  def destroy
+    @post.delete
+    redirect_to posts_path, notice: "Post was deleted."
   end 
   def update
     if @post.update(post_params)
