@@ -1,8 +1,2 @@
 <h1>New Posts.</h1>
-<%= form_for @post do |f| %>
-  
-  <%= f.date_field :date %>
-  <%= f.text_area :rationale %>
-  <%= f.submit 'Save' %>
-
-<% end %>
+<%= render 'form' %>

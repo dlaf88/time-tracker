@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 describe 'navigate' do 
-  
-  describe 'index page' do
     before do
-      @user = User.create(email: 'admin@admin.com',password: 'asdfasdf',password_confirmation: 'asdfasdf',first_name: 'Jon',last_name:'Snow')
+      @user = FactoryGirl.create(:user)
       login_as(@user, :scope => :user)  
-       visit posts_path
+    end  
+  describe 'index page' do
+    before do     
+      visit posts_path
     end
     it 'can be reached successfully' do       
       expect(page.status_code).to eq(200)
@@ -15,17 +16,15 @@ describe 'navigate' do
       expect(page).to have_content(/Posts/)
     end
     it 'has a Post list' do
-      post1 = Post.create(:date => Date.today, :rationale => 'Post1', user_id: @user.id)
-      post2 = Post.create(:date => Date.today, :rationale => 'Post2', user_id: @user.id)
+      post1 = FactoryGirl.create(:post)
+      post2 = FactoryGirl.create(:second_post)
       visit posts_path
-      expect(page).to have_content(/Post1|Post2/)
+      expect(page).to have_content(/First Post|Second Post/)
     end
   end
   
   describe 'creation' do  
     before do      
-      user = User.create(email: 'test@test.com',password: 'asdfasdf',password_confirmation: 'asdfasdf',first_name: 'Jon',last_name:'Snow')
-     login_as(user, :scope => :user)     
       visit new_post_path
     end
     it 'has a new form that can be reached' do      
@@ -43,6 +42,24 @@ describe 'navigate' do
       fill_in 'post[rationale]', with: 'I created this post.'
       click_on 'Save'           
       expect(User.last.posts.last.rationale).to eq("I created this post.")      
+    end 
+  end
+  describe 'edit' do 
+    before do 
+       @post = FactoryGirl.create(:post)
+    end
+    it 'can be reached by clicking edit on index page' do      
+      visit posts_path
+      click_link("edit_#{@post.id}")
+      expect(page.status_code).to eq(200)
+    end
+    it 'can be edited ' do 
+      visit edit_post_path(@post)
+      fill_in 'post[date]', with: Date.today
+      fill_in 'post[rationale]', with: 'Some other rationale'
+      click_on 'Save'
+      
+      expect(page).to have_content("Some other rationale")
     end 
   end
 end
