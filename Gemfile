@@ -24,3 +24,5 @@ group :development do
 end
 gem 'devise', '~> 4.2'
 gem 'gritter', '~> 1.2'
+gem "administrate", "~> 0.2.2"
+gem 'bourbon'
