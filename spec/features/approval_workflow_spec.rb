@@ -24,7 +24,16 @@ describe 'navigate' do
     visit edit_post_path(@post)
     expect(page).to_not have_content('Approved')
   end 
-end #describe edit
+    it 'cannot be edited by a user after post has been approved' do
+      user = FactoryGirl.create(:user)
+      @post.update(:status => 'approved')
+      
+      logout(:admin_user)
+      login_as(user)
+      visit edit_post_path(@post)
+      expect(current_path).to eq(root_path)
+    end
+  end #describe edit
 end 
 
 
