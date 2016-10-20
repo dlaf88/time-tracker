@@ -16,10 +16,15 @@ describe 'navigate' do
       expect(page).to have_content(/Posts/)
     end
     it 'has a Post list' do
-      post1 = FactoryGirl.create(:post)
-      post2 = FactoryGirl.create(:second_post)
-      visit posts_path
-      expect(page).to have_content(/First Post|Second Post/)
+     
+     post = Post.create(date: Date.today,rationale: "This is the new rationale.",user_id: @user.id)
+     post2 = Post.create(date: Date.today,rationale: "This is the other post.",user_id: @user.id)
+     other_user = User.create(first_name: 'Ken',last_name: 'Bone',email: 'svengoolie@gmail.com',password: 'asdfasdf',password_confirmation: 'asdfasdf')
+     post3 = Post.create(date: Date.today,rationale: "Do not see me.",user_id: other_user.id)
+     
+     visit posts_path
+     expect(page).to_not have_content(/Do not see me./)
+    
     end
   end
   describe 'new' do
@@ -31,7 +36,7 @@ describe 'navigate' do
   end
   describe 'delete' do
     it 'can be deleted' do
-      post = FactoryGirl.create(:post)
+      post = Post.create(date: Date.today,rationale: "This is the new rationale.",user_id: @user.id)
       visit posts_path
       
       click_link ("delete_post_#{post.id}")
