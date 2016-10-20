@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'navigate' do 
   let(:user){FactoryGirl.create(:user)}
   let(:post) do 
-    Post.create(date: Date.today, rationale: "Some rationale here.", user_id: user.id)
+    Post.create(date: Date.today, rationale: "Some rationale here.", user_id: user.id, overtime_request: 2.5)
   end 
     before do      
       login_as(user, :scope => :user)  
@@ -20,7 +20,7 @@ describe 'navigate' do
     end
     it 'has a Post list' do
      other_user = User.create(first_name: 'Ken',last_name: 'Bone',email: 'svengoolie@gmail.com',password: 'asdfasdf',password_confirmation: 'asdfasdf')
-     post3 = Post.create(date: Date.today,rationale: "Do not see me.",user_id: other_user.id)
+     post3 = Post.create(date: Date.today,rationale: "Do not see me.",user_id: other_user.id,overtime_request: 2.5)
      
      visit posts_path
      expect(page).to_not have_content(/Do not see me./)
@@ -36,7 +36,7 @@ describe 'navigate' do
   end
   describe 'delete' do
     it 'can be deleted' do
-      post = Post.create(date: Date.yesterday, rationale: "This is some other post", user_id: user.id)
+      post = Post.create(date: Date.yesterday, rationale: "This is some other post", user_id: user.id,overtime_request: 2.5)
       visit posts_path      
       click_link ("delete_post_#{post.id}")
       expect(page.status_code).to eq(200)
@@ -53,13 +53,15 @@ describe 'navigate' do
     it 'has a form that can be filled out' do
       fill_in 'post[date]', with: Date.today
       fill_in 'post[rationale]', with: 'Some rationale.'
-      click_on 'Save'          
-      expect(page).to have_content("Some rationale.")
+      fill_in 'post[overtime_request]', with: 4.5
+      
+      expect{ click_on 'Save'}.to change(Post,:count).by(1)
     end
     
     it 'has form that can be filled out with an associated user' do
       fill_in 'post[date]', with: Date.today
       fill_in 'post[rationale]', with: 'I created this post.'
+      fill_in 'post[overtime_request]', with: 4.5
       click_on 'Save'           
       expect(User.last.posts.last.rationale).to eq("I created this post.")      
     end 

@@ -39,6 +39,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])    
   end
   def post_params
-    params.require(:post).permit(:date,:rationale,:status)
+    params.require(:post).permit(:date,:rationale,:status,:overtime_request)
   end
 end
