@@ -28,3 +28,5 @@ gem "administrate", "~> 0.2.2"
 gem 'bourbon'
 gem 'pundit', '~> 1.1'
 gem 'puma', '~> 3.6'
+gem 'figaro'
+gem 'twilio-ruby', '~> 4.13'

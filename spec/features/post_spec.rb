@@ -19,7 +19,7 @@ describe 'navigate' do
       expect(page).to have_content(/Posts/)
     end
     it 'has a Post list' do
-     other_user = User.create(first_name: 'Ken',last_name: 'Bone',email: 'svengoolie@gmail.com',password: 'asdfasdf',password_confirmation: 'asdfasdf')
+     other_user = User.create(first_name: 'Ken',last_name: 'Bone',email: 'svengoolie@gmail.com',password: 'asdfasdf',password_confirmation: 'asdfasdf',phone:'1234567891')
      post3 = Post.create(date: Date.today,rationale: "Do not see me.",user_id: other_user.id,overtime_request: 2.5)
      
      visit posts_path
@@ -77,7 +77,7 @@ describe 'navigate' do
       expect(page).to have_content("Some other rationale")
     end 
     it 'cannot be edited by non authorized user' do
-      ken = User.create(first_name: 'Ken', last_name: 'Bone', email: 'svengoolie@gmail.com', password:'asdfasdf',password_confirmation: 'asdfasdf')
+      ken = User.create(first_name: 'Ken', last_name: 'Bone', email: 'svengoolie@gmail.com', password:'asdfasdf',password_confirmation: 'asdfasdf',phone: '1234567891')
       logout(user)
       login_as(ken, scope: :user)
       visit edit_post_path(post)      
