@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   def show    
   end
   def index
-    @posts = Post.posts_by(current_user)
+    @posts = Post.posts_by(current_user).page(params[:page]).per(10)
   end
   def new
     @post = Post.new

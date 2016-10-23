@@ -13,7 +13,10 @@
         <th>Delete Entry</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="posts" >
    <%= render @posts %>     
     </tbody>
   </table>
+<div id="paginator">
+  <%= paginate @posts, remote: true %>
+</div>
