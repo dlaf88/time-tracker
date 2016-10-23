@@ -15,7 +15,12 @@ describe 'Audit Log Feature' do
     it 'renders audit log content' do        
       expect(page).to have_content(/SNOW, JON/)
     end 
-    xit 'cannot be accessed by regular user' do
+    it 'cannot be accessed by regular user' do
+      logout(admin_user)
+      user = FactoryGirl.create(:user)
+      login_as(user, scope: :user)
+      visit audit_logs_path
+      expect(current_path).to eq(root_path)
     end 
   end  
 end 
