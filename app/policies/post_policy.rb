@@ -1,4 +1,7 @@
 class PostPolicy < ApplicationPolicy
+def approve?
+  admin?
+end 
   
 def update?
   # if

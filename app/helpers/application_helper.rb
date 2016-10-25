@@ -1,4 +1,7 @@
 module ApplicationHelper
+  def admin_types
+    ["AdminUser"]
+  end
   def active(path)
     return "active" if current_page?(path)
   end 

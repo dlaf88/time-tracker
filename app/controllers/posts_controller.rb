@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show,:edit,:update,:destroy]
+  before_action :set_post, only: [:show,:edit,:update,:destroy,:approve]
  
   def show    
   end
@@ -34,6 +34,11 @@ class PostsController < ApplicationController
       render :edit
     end 
   end
+  def approve
+    authorize(@post)
+    @post.approved!
+    redirect_to root_path, notice: 'Post was approved'
+  end 
   private
   def set_post
     @post = Post.find(params[:id])    

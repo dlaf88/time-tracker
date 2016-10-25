@@ -1,0 +1,19 @@
+<% pending_posts.each do |post| %>
+  <div class='homepage-block col-md-3'>
+    <h4><%= post.user.full_name %></h4>
+    <div>
+      <span>Date submitted: </span> <%= post.date %>
+    </div>
+    <div>
+      <span>Rationale: </span> <%= truncate post.rationale, length: 42 %>
+    </div>
+    <div class='row'>
+      <div class='col-md-6 column'>
+        <%= link_to 'Approve', approve_post_path(post), class: 'btn btn-success btn-block',id: "approve_#{post.id}" %>
+      </div>
+      <div class='col-md-6 column'>
+        <%= link_to 'Review', edit_post_path(post), class: 'btn btn-warning btn-block' %>
+      </div>
+    </div>
+  </div>		
+<% end %>
