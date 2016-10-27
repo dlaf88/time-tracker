@@ -1,9 +1,18 @@
-<div class='container-fluid'>
-
+<div class='container'>
 	<div class='pending-homepage row'>
     <div>
       <h3> Items Pending Your Approval.</h3>
+      <hr>
+      <%= render partial: 'pending_posts',locals: {pending_posts: @pending_posts} %>
     </div>
-    <hr>
-   <%= render partial: 'pending_posts',locals: {pending_posts: @pending_posts} %>
+  </div>
+   <div class='pending-homepage row'>
+      <h3> Confirmation Log.</h3>
+      <hr>
+      <%= render partial: 'confirmation_log',locals: {recent_audit_items: @recent_audit_items} %>
+      <div style='clear:left'>
+       <%= link_to "View all items", audit_logs_path, class: 'btn btn-danger btn-block' %>
+      </div>
+   </div><!-- pending-homepage row -->      
 </div>
+  

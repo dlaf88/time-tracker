@@ -1,1 +1,14 @@
 <h1>Hi Employee</h1>
+<br>
+<div class="row">
+  <div class="well">
+    <h3> Pending Your Confirmation</h3>
+    <%=  render partial: 'pending_audit_confirmations', locals: {pending_audit_confirmations: @pending_audit_confirmations} %>                   
+  </div>
+  <div class="well">
+
+    <button type="button" class="btn btn-success btn-lg btn-block">
+      Something
+    </button>
+  </div>
+</div>
