@@ -1,14 +1,13 @@
 <h1>Hi Employee</h1>
 <br>
 <div class="row">
+  <% if @pending_audit_confirmations.count > 0 %>
   <div class="well">
     <h3> Pending Your Confirmation</h3>
-    <%=  render partial: 'pending_audit_confirmations', locals: {pending_audit_confirmations: @pending_audit_confirmations} %>                   
-  </div>
+    <%= render partial: 'pending_audit_confirmations', locals: {pending_audit_confirmations: @pending_audit_confirmations} %>     </div>
+  <% end %>
   <div class="well">
-
-    <button type="button" class="btn btn-success btn-lg btn-block">
-      Something
-    </button>
+    <h3> Request Overtime</h3>    
+    <%= link_to 'Overtime', new_post_path, class:'btn btn-success btn-block' %>    
   </div>
 </div>
