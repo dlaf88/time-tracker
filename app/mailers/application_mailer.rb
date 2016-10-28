@@ -1,5 +1,4 @@
-class ApplicationMailer < ActionMailer::Base
-  
-  default from: "diego@lafuentelaw.com"
+class ApplicationMailer < ActionMailer::Base  
+  default from: "info@mail.llenapapeles.com"
   layout 'mailer'
 end
